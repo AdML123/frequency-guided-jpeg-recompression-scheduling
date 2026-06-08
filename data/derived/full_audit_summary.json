@@ -1,0 +1,27 @@
+{
+  "mode": "combined-mcnemar-audit",
+  "metric_inputs": [
+    "..\\..\\tmp\\full-cifar10-20260603\\mcnemar_audit\\metrics.csv",
+    "..\\..\\tmp\\full-cifar10-20260603\\rice_audit\\metrics.csv",
+    "..\\..\\tmp\\full-cifar10-20260603\\rice_pgd_shards\\offset_0\\metrics.csv",
+    "..\\..\\tmp\\full-cifar10-20260603\\rice_pgd_shards\\offset_2000\\metrics.csv",
+    "..\\..\\tmp\\full-cifar10-20260603\\rice_pgd_shards\\offset_4000\\metrics.csv",
+    "..\\..\\tmp\\full-cifar10-20260603\\rice_pgd_shards\\offset_6000\\metrics.csv",
+    "..\\..\\tmp\\full-cifar10-20260603\\rice_pgd_shards\\offset_8000\\metrics.csv"
+  ],
+  "source_inputs": [
+    "..\\..\\tmp\\full-cifar10-20260603\\mcnemar_audit\\source_data.csv",
+    "..\\..\\tmp\\full-cifar10-20260603\\rice_audit\\source_data.csv",
+    "..\\..\\tmp\\full-cifar10-20260603\\rice_pgd_shards\\offset_0\\source_data.csv",
+    "..\\..\\tmp\\full-cifar10-20260603\\rice_pgd_shards\\offset_2000\\source_data.csv",
+    "..\\..\\tmp\\full-cifar10-20260603\\rice_pgd_shards\\offset_4000\\source_data.csv",
+    "..\\..\\tmp\\full-cifar10-20260603\\rice_pgd_shards\\offset_6000\\source_data.csv",
+    "..\\..\\tmp\\full-cifar10-20260603\\rice_pgd_shards\\offset_8000\\source_data.csv"
+  ],
+  "rows": 48,
+  "source_rows": 480000,
+  "metrics_csv": "..\\..\\tmp\\full-cifar10-20260603\\combined_audit\\metrics.csv",
+  "source_data_csv": "..\\..\\tmp\\full-cifar10-20260603\\combined_audit\\source_data.csv",
+  "metrics_derivation": "regenerated from combined source_data.csv with clean-correct ASR denominators; no-defense baselines aggregated from shard metrics",
+  "clean_accuracy_range_valid": true
+}

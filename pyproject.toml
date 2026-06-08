@@ -1,0 +1,38 @@
+[build-system]
+requires = ["setuptools>=68", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "jpeg-recompression-schedule"
+version = "0.1.0"
+description = "Reproducible code for perturbation-centroid JPEG recompression schedule selection."
+readme = "README.md"
+requires-python = ">=3.10"
+license = {text = "MIT"}
+dependencies = [
+  "numpy",
+  "pandas",
+  "matplotlib",
+  "pillow",
+  "scipy",
+  "torch",
+  "torchvision",
+]
+
+[project.optional-dependencies]
+full = [
+  "pytest",
+  "timm",
+  "safetensors",
+  "robustbench",
+]
+dev = [
+  "pytest",
+]
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+pythonpath = ["src", "."]

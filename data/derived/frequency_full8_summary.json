@@ -1,0 +1,11 @@
+{
+  "mode": "frequency-full8-merged",
+  "rows": 8,
+  "max_samples": 10000,
+  "frequency_metrics_csv": "tmp\\full-cifar10-20260603\\frequency_10k_full8\\frequency_metrics.csv",
+  "sources": {
+    "direct_full_rows": "tmp\\full-cifar10-20260603\\frequency_10k_nonadaptive\\frequency_metrics.csv",
+    "rice_fgsm_shards": "tmp\\full-cifar10-20260603\\frequency_rice_fgsm_shards",
+    "rice_pgd_shards": "tmp\\full-cifar10-20260603\\frequency_rice_pgd_shards"
+  }
+}
