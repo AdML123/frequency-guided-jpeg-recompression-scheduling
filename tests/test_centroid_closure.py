@@ -109,7 +109,7 @@ def test_make_figures_script_does_not_emit_removed_eta_or_mechanism_figures(tmp_
     )
 
     assert exit_code == 0
-    assert (out_dir / "figure1_asr_by_generation.pdf").is_file()
+    assert (out_dir / "figure2_asr_by_generation.pdf").is_file()
     assert not (out_dir / "figure1_mechanism_schematic.pdf").exists()
     assert not (out_dir / "figure2_eta_distribution.pdf").exists()
     assert not (out_dir / "figure2_frequency_matching.pdf").exists()

@@ -50,8 +50,8 @@ def test_make_asr_by_generation_writes_pdf_and_png(tmp_path):
     outputs = make_asr_by_generation(metrics_csv, out_dir)
 
     assert outputs == (
-        out_dir / "figure1_asr_by_generation.pdf",
-        out_dir / "figure1_asr_by_generation.png",
+        out_dir / "figure2_asr_by_generation.pdf",
+        out_dir / "figure2_asr_by_generation.png",
     )
     assert outputs[0].is_file()
     assert outputs[1].is_file()
@@ -126,8 +126,8 @@ def test_make_centroid_vs_delta_scatter_writes_pdf_and_png(tmp_path):
     outputs = make_centroid_vs_delta_scatter(frequency_csv, source_data_csv, out_dir)
 
     assert outputs == (
-        out_dir / "figure2_centroid_vs_delta.pdf",
-        out_dir / "figure2_centroid_vs_delta.png",
+        out_dir / "figure4_centroid_vs_delta.pdf",
+        out_dir / "figure4_centroid_vs_delta.png",
     )
     assert outputs[0].is_file()
     assert outputs[1].is_file()
@@ -291,8 +291,8 @@ def test_make_figures_script_writes_expected_outputs(tmp_path):
     )
 
     assert result.returncode == 0, result.stderr
-    assert (out_dir / "figure1_asr_by_generation.pdf").is_file()
-    assert (out_dir / "figure1_asr_by_generation.png").is_file()
+    assert (out_dir / "figure2_asr_by_generation.pdf").is_file()
+    assert (out_dir / "figure2_asr_by_generation.png").is_file()
     assert not (out_dir / "figure1_mechanism_schematic.pdf").exists()
     assert not (out_dir / "figure2_eta_distribution.pdf").exists()
     assert not (out_dir / "figure2_frequency_matching.pdf").exists()
@@ -331,8 +331,8 @@ def test_make_figures_script_writes_centroid_delta_when_source_data_is_supplied(
     )
 
     assert result.returncode == 0, result.stderr
-    assert (out_dir / "figure2_centroid_vs_delta.pdf").is_file()
-    assert (out_dir / "figure2_centroid_vs_delta.png").is_file()
+    assert (out_dir / "figure4_centroid_vs_delta.pdf").is_file()
+    assert (out_dir / "figure4_centroid_vs_delta.png").is_file()
 
 
 def test_make_figures_script_accepts_separate_asr_metrics_csv(tmp_path):
@@ -358,5 +358,5 @@ def test_make_figures_script_accepts_separate_asr_metrics_csv(tmp_path):
     )
 
     assert result.returncode == 0, result.stderr
-    assert (out_dir / "figure1_asr_by_generation.pdf").is_file()
+    assert (out_dir / "figure2_asr_by_generation.pdf").is_file()
     assert (out_dir / "figure3_attack_range_summary.pdf").is_file()

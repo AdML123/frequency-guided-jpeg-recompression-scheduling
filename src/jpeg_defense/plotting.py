@@ -2,8 +2,8 @@
 
 from __future__ import annotations
 
-from pathlib import Path
 import math
+from pathlib import Path
 
 import matplotlib
 
@@ -58,15 +58,15 @@ def load_metrics_csv(path):
 
 
 def make_asr_by_generation(metrics_csv, out_dir):
-    """Write Fig. 1: CIFAR-10 ResNet-18 PGD R1 ASR by JPEG generation."""
+    """Write Fig. 2: CIFAR-10 ResNet-18 PGD R1 ASR by JPEG generation."""
     df = _filter_cifar_rows(load_metrics_csv(metrics_csv))
     focused = _c10_resnet18_pgd_r1_subset(df)
     if not focused.empty:
         df = focused
     out_dir = Path(out_dir)
     out_dir.mkdir(parents=True, exist_ok=True)
-    pdf_path = out_dir / "figure1_asr_by_generation.pdf"
-    png_path = out_dir / "figure1_asr_by_generation.png"
+    pdf_path = out_dir / "figure2_asr_by_generation.pdf"
+    png_path = out_dir / "figure2_asr_by_generation.png"
 
     generation_col = _generation_column(df)
     _require_columns(df, ["schedule", generation_col, "asr"])
@@ -292,8 +292,8 @@ def make_centroid_vs_delta_scatter(frequency_csv, source_data_csv, out_dir):
     source_df = _filter_cifar_rows(load_metrics_csv(source_data_csv).copy())
     out_dir = Path(out_dir)
     out_dir.mkdir(parents=True, exist_ok=True)
-    pdf_path = out_dir / "figure2_centroid_vs_delta.pdf"
-    png_path = out_dir / "figure2_centroid_vs_delta.png"
+    pdf_path = out_dir / "figure4_centroid_vs_delta.pdf"
+    png_path = out_dir / "figure4_centroid_vs_delta.png"
 
     condition_cols = _condition_key_columns(frequency_df, source_df)
     _require_columns(frequency_df, [*condition_cols, "omega_delta", "tau"])
@@ -388,7 +388,7 @@ def make_centroid_vs_delta_scatter(frequency_csv, source_data_csv, out_dir):
 
 
 def make_attack_range_summary(metrics_csv, out_dir):
-    """Write Fig. 3: range-level lowest-ASR schedule-count summary."""
+    """Write Fig. 3: compact range-level lowest-ASR schedule-count summary."""
     df = _filter_cifar_rows(load_metrics_csv(metrics_csv).copy())
     out_dir = Path(out_dir)
     out_dir.mkdir(parents=True, exist_ok=True)
@@ -411,7 +411,7 @@ def make_attack_range_summary(metrics_csv, out_dir):
     pivot = pivot.rename(columns=_schedule_display_name)
     pivot.index = [_condition_display_label(label) for label in pivot.index]
 
-    fig, ax = plt.subplots(figsize=(3.55, max(2.5, 0.30 * len(pivot.index) + 1.15)))
+    fig, ax = plt.subplots(figsize=(3.45, max(1.85, 0.18 * len(pivot.index) + 0.82)))
     y_positions = list(range(len(pivot.index)))
     left = [0.0] * len(pivot.index)
     handles = []
@@ -425,7 +425,7 @@ def make_attack_range_summary(metrics_csv, out_dir):
             y_positions,
             values,
             left=left,
-            height=0.66,
+            height=0.50,
             color=style["color"],
             edgecolor="#222222",
             linewidth=0.45,
@@ -435,14 +435,14 @@ def make_attack_range_summary(metrics_csv, out_dir):
         left = [base + value for base, value in zip(left, values)]
         handles.append(bars[0])
         labels.append(display_name)
-    ax.set_xlabel("Lowest-ASR QF-range count")
+    ax.set_xlabel("Lowest-ASR range count")
     ax.set_ylabel("")
     ax.set_yticks(y_positions, labels=pivot.index)
     ax.set_xlim(left=0.0, right=max(left) + 0.25 if left else 1.0)
     ax.xaxis.set_major_locator(MaxNLocator(integer=True))
     ax.grid(True, axis="x", alpha=0.25, linewidth=0.45)
     ax.invert_yaxis()
-    _legend_above(ax, handles, labels, ncol=min(2, max(1, len(handles))))
+    _legend_above(ax, handles, labels, ncol=min(2, max(1, len(handles))), y=1.06)
     fig.tight_layout(pad=0.35)
     _save_figure(fig, pdf_path, png_path)
     return pdf_path, png_path

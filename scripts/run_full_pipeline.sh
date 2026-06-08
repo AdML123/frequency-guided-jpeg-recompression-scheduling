@@ -13,10 +13,9 @@ export CODE_DIR DATA_DIR RESULTS_DIR
 METRICS_DIR="$RESULTS_DIR/metrics"
 FIGURES_DIR="$RESULTS_DIR/figures"
 TABLES_DIR="$RESULTS_DIR/tables"
-PAPER_DIR="$RESULTS_DIR/paper"
 LOGS_DIR="$RESULTS_DIR/logs"
 
-mkdir -p "$METRICS_DIR" "$FIGURES_DIR" "$TABLES_DIR" "$PAPER_DIR" "$LOGS_DIR"
+mkdir -p "$METRICS_DIR" "$FIGURES_DIR" "$TABLES_DIR" "$LOGS_DIR"
 
 cd "$CODE_DIR"
 
@@ -213,41 +212,4 @@ echo "Generating tables from $METRICS_CSV"
   --out-dir "$TABLES_DIR" \
   > "$LOGS_DIR/make_tables.log" 2>&1
 
-DRAFT_PATH="$PAPER_DIR/smoke_draft.md"
-DRAFT_SOURCE="$CODE_DIR/manuscript_draft.md"
-if [ ! -f "$DRAFT_SOURCE" ]; then
-  echo "Missing manuscript draft: $DRAFT_SOURCE" >&2
-  exit 1
-fi
-cp "$DRAFT_SOURCE" "$DRAFT_PATH"
-
-echo "Rendering manuscript source"
-"$PYTHON" scripts/render_manuscript.py \
-  --draft "$DRAFT_PATH" \
-  --metrics-csv "$METRICS_CSV" \
-  --frequency-csv "$FREQUENCY_METRICS_CSV" \
-  --source-data-csv "$SOURCE_DATA_CSV" \
-  --figures-dir "$FIGURES_DIR" \
-  --tables-dir "$TABLES_DIR" \
-  --out "$PAPER_DIR/main.tex" \
-  > "$LOGS_DIR/render_manuscript.log" 2>&1
-
-if command -v latexmk >/dev/null 2>&1; then
-  echo "Compiling $PAPER_DIR/main.tex with latexmk"
-  (
-    cd "$PAPER_DIR"
-    latexmk -pdf -interaction=nonstopmode -halt-on-error main.tex
-  ) > "$LOGS_DIR/latexmk.log" 2>&1
-  if [ ! -s "$PAPER_DIR/main.pdf" ]; then
-    echo "latexmk completed but main.pdf was not generated; see $LOGS_DIR/latexmk.log" >&2
-    exit 1
-  fi
-  echo "Compiled PDF available at $PAPER_DIR/main.pdf" >> "$LOGS_DIR/latexmk.log"
-else
-  {
-    echo "latexmk is not available in this environment."
-    echo "Leaving generated LaTeX source at $PAPER_DIR/main.tex without compiling a PDF."
-  } > "$LOGS_DIR/latexmk.log"
-fi
-
-echo "Capsule run complete. Downloadable outputs are under $RESULTS_DIR"
+echo "Data-result reproduction complete. Outputs are under $RESULTS_DIR"

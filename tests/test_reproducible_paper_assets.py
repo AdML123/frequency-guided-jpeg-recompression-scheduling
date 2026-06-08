@@ -34,12 +34,41 @@ def test_readme_documents_verified_reproduction_commands():
         assert token in readme
 
 
-def test_latex_uses_figure_assets_written_by_repository_scripts():
-    tex = (REPO.parent / "latex_source" / "main.tex").read_text(encoding="utf-8")
-    for figure in [
-        "figure1_asr_by_generation.pdf",
-        "figure2_centroid_vs_delta.pdf",
-        "figure3_attack_range_summary.pdf",
-    ]:
-        assert figure in tex
-        assert (REPO.parent / "latex_source" / "figures" / figure).is_file()
+def test_repository_scope_is_data_result_reproduction_not_full_paper_rendering():
+    readme = (REPO / "README.md").read_text(encoding="utf-8")
+    assert "reproduce the paper data results" in readme
+    forbidden = [
+        "Rebuild LaTeX Paper",
+        "latexmk",
+        "copy the regenerated",
+        "compile from the LaTeX source root",
+    ]
+    for token in forbidden:
+        assert token not in readme
+
+
+def test_ieee_conference_artifact_best_practice_files_exist():
+    required = [
+        "environment.yml",
+        "REPRODUCIBILITY.md",
+        "ARTIFACTS.md",
+        "SECURITY.md",
+        "results/README.md",
+        "scripts/benchmark_runtime.py",
+    ]
+    for rel in required:
+        assert (REPO / rel).is_file(), rel
+
+
+def test_readme_identifies_icsip2026_artifact_and_safe_auth():
+    readme = (REPO / "README.md").read_text(encoding="utf-8")
+    required = [
+        "2026 11th International Conference on Signal and Image Processing",
+        "GitHub CLI",
+        "gh auth login --web",
+        "personal access token",
+        "SSH",
+        "No password authentication",
+    ]
+    for token in required:
+        assert token in readme

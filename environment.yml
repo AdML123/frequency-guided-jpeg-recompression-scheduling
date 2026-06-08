@@ -1,0 +1,16 @@
+name: paper20-cu128
+channels:
+  - pytorch
+  - conda-forge
+  - defaults
+dependencies:
+  - python=3.10
+  - numpy
+  - pandas
+  - matplotlib
+  - pillow
+  - scipy
+  - pytest
+  - pip
+  - pip:
+      - -e .

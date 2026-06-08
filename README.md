@@ -1,31 +1,45 @@
-# JPEG Recompression Schedule Selection
+# Frequency-Guided JPEG Recompression Scheduling
 
-This repository contains the reproducibility code and derived data for the
-double-blind ICSIP 2026 submission "Perturbation Centroid Predicts JPEG
-Recompression Schedule for Adversarial Defense."
+This repository is the reproducibility artifact for the 2026 11th International Conference on Signal and Image Processing
+submission "Frequency-Guided JPEG Recompression Scheduling for Adversarial
+Defense." Use this repository to reproduce the paper data results: included
+data figures, table snippets, smoke tests, and runtime microbenchmark. It is
+not a LaTeX paper-build repository.
 
 ## Paper Claim
 
-JPEG recompression is usually treated as a fixed preprocessing step. This work
-tests whether the order of JPEG quality factors (QFs) is a predictable design
-variable. On the included nonadaptive CIFAR-10 evaluation summaries, the
-perturbation discrete cosine transform (DCT) centroid rule
-`omega_delta > tau` predicts whether front-loaded (FL) or fixed (Fix)
-recompression gives the lower attack success rate (ASR) in 5/8 model-attack
-conditions. The remaining 3/8 conditions differ by less than one percentage
-point and are treated as practically equivalent.
+JPEG recompression is usually treated as a fixed preprocessing step. The exact
+paper claim is that the order of JPEG quality factors (QFs) is a predictable
+design variable for multi-generation recompression. On the included nonadaptive
+CIFAR-10 evaluation summaries, the perturbation discrete cosine transform (DCT)
+centroid rule `omega_delta > tau` predicts whether front-loaded (FL) or fixed
+(Fix) recompression gives the lower attack success rate (ASR) in 5/8
+model-attack conditions. The remaining 3/8 conditions differ by less than one
+percentage point and are treated as practically equivalent. For standard
+ResNet-18 attacks, changing the schedule order changes ASR by 12-19 percentage
+points.
+
+## Safe GitHub Authentication
+
+No password authentication is used for GitHub operations. Use GitHub CLI with
+`gh auth login --web`, a personal access token stored outside the repository, or
+SSH. Do not write, paste, commit, or transmit account credentials in this
+repository.
+
+See `REPRODUCIBILITY.md` for exact commands, `ARTIFACTS.md` for the
+figure/table source map, and `SECURITY.md` for the credential and reporting
+policy.
 
 ## Repository Layout
 
-- `src/jpeg_defense/`: package code for schedules, metrics, plotting, tables,
-  model wrappers, attacks, and manuscript helpers.
+- `src/jpeg_defense/`: package code for schedules, metrics, plotting, table
+  generation, model wrappers, and attacks.
 - `scripts/`: command-line entrypoints for tests, figures, tables, resource
   checks, full reruns, and secret scanning.
 - `tests/`: pytest suite for package behavior and repository-delivery checks.
 - `data/derived/`: derived CSV and JSON files used by the paper figures and
   tables.
 - `results/`: default output directory for regenerated local artifacts.
-- `paper/`: notes and mirrored paper assets for the current delivery.
 - `third_party/diffjpeg/`: vendored DiffJPEG code and its license notice.
 - `.github/workflows/ci.yml`: GitHub Actions smoke test workflow.
 
@@ -70,10 +84,10 @@ conda run -n paper20-cu128 python scripts/make_figures.py --metrics-csv data/der
 
 Expected outputs:
 
-- `results/figures/figure1_asr_by_generation.pdf`
-- `results/figures/figure1_asr_by_generation.png`
-- `results/figures/figure2_centroid_vs_delta.pdf`
-- `results/figures/figure2_centroid_vs_delta.png`
+- `results/figures/figure2_asr_by_generation.pdf`
+- `results/figures/figure2_asr_by_generation.png`
+- `results/figures/figure4_centroid_vs_delta.pdf`
+- `results/figures/figure4_centroid_vs_delta.png`
 - `results/figures/figure3_attack_range_summary.pdf`
 - `results/figures/figure3_attack_range_summary.png`
 
@@ -99,20 +113,9 @@ Expected outputs:
 - `results/tables/table_robust_training_gradient.tex`
 - `results/tables/table_jpeg_aware_boundary.tex`
 
-## Rebuild LaTeX Paper Note
-
-The conference LaTeX source is delivered as a sibling artifact to this
-repository candidate. To rebuild the paper after regenerating figures and
-tables, copy the regenerated `results\figures` and `results\tables` artifacts
-into that LaTeX source tree and compile from the LaTeX source root:
-
-```powershell
-latexmk -pdf -interaction=nonstopmode -halt-on-error main.tex
-```
-
-This repository is responsible for regenerating paper assets from included
-derived data. It does not require raw datasets or model checkpoints for the
-figure and table reproduction commands above.
+This repository is responsible for regenerating data-result artifacts from
+included derived data. It does not require raw datasets or model checkpoints for
+the figure and table reproduction commands above.
 
 ## Full Experiment Rerun Requirements
 

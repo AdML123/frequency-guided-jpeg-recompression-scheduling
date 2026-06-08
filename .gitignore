@@ -7,8 +7,11 @@ __pycache__/
 venv/
 dist/
 build/
+
+# Regenerated paper outputs stay local except for the directory guide.
 results/*
 !results/README.md
+
 *.egg-info/
 *.aux
 *.fdb_latexmk
@@ -17,14 +20,22 @@ results/*
 *.synctex.gz
 *.out
 *.toc
+
+# Raw datasets, checkpoints, and private model artifacts are not redistributed.
 data/raw/
 data/checkpoints/
+checkpoints/
 models/
 *.pt
 *.pth
 *.ckpt
+
 *.tar
 *.zip
+
+# Credentials and local secret material must stay out of version control.
 .env
+.env.*
+secrets/
 *.key
 *.pem
