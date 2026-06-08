@@ -1,6 +1,11 @@
-# DiffJPEG: A PyTorch implementation
+# DiffJPEG: vendored PyTorch implementation
 
-This is a pytorch implementation of differentiable jpeg compression algorithm.  This work is based on the discussion in this [paper](https://machine-learning-and-security.github.io/papers/mlsec17_paper_54.pdf).  The work relies heavily on the tensorflow implementation in this [repository](https://github.com/rshin/differentiable-jpeg)
+This directory vendors a PyTorch implementation of differentiable JPEG
+compression used by the JPEG-aware boundary checks in this reproducibility
+package. The implementation is based on the discussion in this
+[paper](https://machine-learning-and-security.github.io/papers/mlsec17_paper_54.pdf)
+and on the TensorFlow implementation in
+[rshin/differentiable-jpeg](https://github.com/rshin/differentiable-jpeg).
 
 ## Requirements
 - Pytorch 1.0.0
@@ -16,5 +21,3 @@ DiffJPEG functions as a standard pytorch module/layer.  To use, first import the
 from DiffJPEG import DiffJPEG
 jpeg = DiffJPEG(hieght=224, width=224, differentiable=True, quality=80)
 ```
-
-![image](./diffjpeg.png)

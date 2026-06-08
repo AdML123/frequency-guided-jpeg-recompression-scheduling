@@ -1,4 +1,4 @@
-"""Generate all manuscript LaTeX table snippets from derived CSV files."""
+"""Generate all paper LaTeX table snippets from derived CSV files."""
 
 from __future__ import annotations
 

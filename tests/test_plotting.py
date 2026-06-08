@@ -248,7 +248,7 @@ def test_best_schedule_counts_keeps_model_attack_groups_separate(tmp_path):
     }
 
 
-def test_schedule_display_name_uses_manuscript_readable_labels():
+def test_schedule_display_name_uses_paper_readable_labels():
     from jpeg_defense.plotting import _schedule_display_name
 
     assert _schedule_display_name("front_loaded") == "front-loaded"

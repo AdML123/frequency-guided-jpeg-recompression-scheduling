@@ -1,4 +1,4 @@
-"""Plotting helpers for manuscript figures."""
+"""Plotting helpers for paper figures."""
 
 from __future__ import annotations
 

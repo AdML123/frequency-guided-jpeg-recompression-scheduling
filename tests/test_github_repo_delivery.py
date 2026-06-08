@@ -44,6 +44,10 @@ def test_repository_contains_no_secret_placeholders_or_local_paths():
         "paper20" + "-cu128",
         "paper" + "-latex",
         ".." + "\\" + ".." + "\\" + "tmp",
+        "Signal Processing " + "Letters",
+        "render_latex_" + "manuscript",
+        "Template class " + "path",
+        "fill-after-local-" + "verification",
     ]
     text_suffixes = {
         ".bib",

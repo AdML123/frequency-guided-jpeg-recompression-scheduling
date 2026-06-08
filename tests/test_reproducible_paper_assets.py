@@ -127,3 +127,25 @@ def test_external_resource_policy_is_documented_without_bundling_raw_assets():
         "redistribution: no",
     ]:
         assert token in manifest
+
+
+def test_full_pipeline_script_defaults_to_paper_data_result_profile():
+    script = (REPO / "scripts" / "run_full_pipeline.sh").read_text(encoding="utf-8")
+    required = [
+        'PIPELINE_PROFILE="${PIPELINE_PROFILE:-paper}"',
+        "--mode mcnemar-audit",
+        "--mode multimodel",
+        "--mode frequency",
+        "run_figure_metrics_cifar_fgsm.log",
+        "run_figure_metrics_cifar_pgd.log",
+        "run_figure_metrics_jpeg_aware.log",
+        "run_figure_metrics_imagenet.log",
+        "FIGURE_INPUTS",
+        'AUDIT_MAX_SAMPLES="${AUDIT_MAX_SAMPLES:-10000}"',
+        'FREQUENCY_MAX_SAMPLES="${FREQUENCY_MAX_SAMPLES:-10000}"',
+        'PIPELINE_PROFILE=smoke',
+    ]
+    for token in required:
+        assert token in script
+
+    assert "--mode smoke" not in script

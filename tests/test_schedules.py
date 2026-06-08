@@ -30,7 +30,7 @@ def test_geometric_schedule_for_r1_five_generations_uses_jpeg_scale_space():
     assert geometric_schedule(75, 50, 5) == [75, 70, 65, 58, 50]
 
 
-def test_arithmetic_schedule_for_r1_three_generations_matches_manuscript():
+def test_arithmetic_schedule_for_r1_three_generations_matches_paper_definition():
     assert arithmetic_schedule(75, 50, 3) == [75, 63, 50]
 
 

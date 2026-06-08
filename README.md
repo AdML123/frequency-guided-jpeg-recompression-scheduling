@@ -60,6 +60,10 @@ conda run -n fgjpeg python -m pip install -r requirements-ci.txt
 conda run -n fgjpeg python -m pip install -e .
 ```
 
+The lighter install is for repository checks and data-result regeneration from
+included CSV/JSON files. Full attack reruns use `environment.yml` or
+`python -m pip install -e .[full]` with a suitable PyTorch build.
+
 ## Check Included Results
 
 The paper results are already included. A quick inventory should show:
@@ -131,9 +135,8 @@ redistributed here:
 
 The external resources are listed in `resources_manifest.yml`. CIFAR-10 is
 referenced by its official archive and checksum. ImageNet validation images are not redistributed because they require authorized access. RobustBench,
-torchvision, and timm model weights are referenced by source and cache path;
-model weights are referenced by source and cache path instead of being committed
-to the git tree.
+torchvision, and timm model weights are referenced by source and cache path
+instead of being committed to the git tree.
 
 Prepare the ignored local layout:
 
@@ -150,10 +153,20 @@ conda run -n fgjpeg python scripts/prepare_resources.py --data-root <local-data-
 Check the local inventory before a full rerun:
 
 ```powershell
-conda run -n fgjpeg python scripts/check_resources.py
+conda run -n fgjpeg python scripts/check_resources.py --data-root <local-data-root> --results-root <local-results-root>
 conda run -n fgjpeg python scripts/verify_resources.py --data-root <local-data-root> --hash
+```
+
+Run the paper data-result pipeline after exporting `CODE_DIR`, `DATA_DIR`, and
+`RESULTS_DIR` for the local machine:
+
+```powershell
 bash scripts/run_full_pipeline.sh
 ```
+
+The default `PIPELINE_PROFILE=paper` uses full CIFAR-10 settings for the paired
+audit and frequency diagnostics. Set `PIPELINE_PROFILE=smoke` only for a quick
+connectivity check.
 
 Machine-specific variables such as `DATA_DIR`, `RESULTS_DIR`,
 `ROBUSTBENCH_ROOT`, `AUTO_ATTACK_ROOT`, and `DIFFJPEG_ROOT` should remain

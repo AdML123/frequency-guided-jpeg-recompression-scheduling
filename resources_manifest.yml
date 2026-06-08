@@ -21,7 +21,8 @@ resources:
     reason_not_bundled: model artifact is large and should be supplied through an explicit release if redistributed
     checksum:
       algorithm: sha256
-      value: fill-after-local-verification
+      value: not recorded in the public package
+      local_command: python scripts/verify_resources.py --data-root <local-data-root> --hash
 
   imagenet_val:
     label: ImageNet validation input
@@ -34,7 +35,8 @@ resources:
     reason_not_bundled: ImageNet validation images require official access and are not mirrored in this public package
     checksum:
       algorithm: sha256
-      value: user-provided
+      value: not recorded in the public package
+      local_command: python scripts/verify_resources.py --data-root <local-data-root> --hash
 
   robustbench_checkpoints:
     label: RobustBench CIFAR-10 Linf checkpoints
@@ -48,7 +50,8 @@ resources:
     reason_not_bundled: third-party model weights are referenced by source and cache path
     checksum:
       algorithm: sha256
-      value: fill-after-local-verification
+      value: not recorded in the public package
+      local_command: python scripts/verify_resources.py --data-root <local-data-root> --hash
 
   torchvision_timm_weights:
     label: ImageNet torchvision and timm weights
@@ -62,4 +65,5 @@ resources:
     reason_not_bundled: pretrained weights are referenced by source and cache path
     checksum:
       algorithm: sha256
-      value: fill-after-local-verification
+      value: not recorded in the public package
+      local_command: python scripts/verify_resources.py --data-root <local-data-root> --hash

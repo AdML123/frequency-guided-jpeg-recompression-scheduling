@@ -111,7 +111,7 @@ def elimination_threshold_for_dataset(dataset):
 
 
 def omega_delta_relation(omega_delta, tau):
-    """Return the manuscript-friendly omega_delta/tau relation."""
+    """Return the paper-friendly omega_delta/tau relation."""
     return ">" if float(omega_delta) > float(tau) else "<="
 
 

@@ -1,4 +1,4 @@
-"""Generate manuscript figures from a metrics CSV."""
+"""Generate paper figures from metrics CSV files."""
 
 from __future__ import annotations
 

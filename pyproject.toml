@@ -15,13 +15,13 @@ dependencies = [
   "matplotlib",
   "pillow",
   "scipy",
-  "torch",
-  "torchvision",
 ]
 
 [project.optional-dependencies]
 full = [
   "pytest",
+  "torch",
+  "torchvision",
   "timm",
   "safetensors",
   "robustbench",

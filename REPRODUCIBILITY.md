@@ -67,7 +67,7 @@ After placing local resources in ignored directories, check availability and
 optionally print local file hashes:
 
 ```powershell
-conda run -n fgjpeg python scripts/check_resources.py
+conda run -n fgjpeg python scripts/check_resources.py --data-root <local-data-root> --results-root <local-results-root>
 conda run -n fgjpeg python scripts/verify_resources.py --data-root <local-data-root> --hash
 ```
 
@@ -76,6 +76,10 @@ Then run:
 ```powershell
 bash scripts/run_full_pipeline.sh
 ```
+
+The default `PIPELINE_PROFILE=paper` is intended to regenerate the paper data
+artifacts from local resources. Use `PIPELINE_PROFILE=smoke` only to check that
+the local environment, resources, and scripts are wired correctly.
 
 Keep machine-specific variables such as `DATA_DIR`, `RESULTS_DIR`,
 `ROBUSTBENCH_ROOT`, `AUTO_ATTACK_ROOT`, and `DIFFJPEG_ROOT` outside version

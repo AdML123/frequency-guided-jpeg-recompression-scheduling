@@ -246,6 +246,32 @@ def test_check_resources_script_succeeds_with_temp_resources(tmp_path):
     assert results_root.is_dir()
 
 
+def test_check_resources_script_accepts_cli_resource_roots(tmp_path):
+    data_root = tmp_path / "data"
+    results_root = tmp_path / "results"
+    _create_resource_set(data_root)
+    script = Path(__file__).resolve().parents[1] / "scripts" / "check_resources.py"
+
+    result = subprocess.run(
+        [
+            sys.executable,
+            str(script),
+            "--data-root",
+            str(data_root),
+            "--results-root",
+            str(results_root),
+        ],
+        check=False,
+        capture_output=True,
+        text=True,
+    )
+
+    assert result.returncode == 0
+    assert f"data={data_root}" in result.stdout
+    assert f"results={results_root}" in result.stdout
+    assert results_root.is_dir()
+
+
 def test_check_resources_script_fails_clearly_without_downloads(tmp_path):
     env = os.environ.copy()
     env.update(
