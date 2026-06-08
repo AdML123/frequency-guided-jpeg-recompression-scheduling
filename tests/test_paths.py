@@ -268,3 +268,38 @@ def test_check_resources_script_fails_clearly_without_downloads(tmp_path):
     assert result.returncode == 1
     assert "Missing required resources" in result.stderr
     assert "No downloads are attempted" in result.stderr
+
+
+def test_prepare_resources_script_creates_expected_layout(tmp_path):
+    data_root = tmp_path / "data"
+    script = Path(__file__).resolve().parents[1] / "scripts" / "prepare_resources.py"
+
+    result = subprocess.run(
+        [sys.executable, str(script), "--data-root", str(data_root)],
+        check=False,
+        capture_output=True,
+        text=True,
+    )
+
+    assert result.returncode == 0
+    assert (data_root / "cifar10").is_dir()
+    assert (data_root / "checkpoints" / "robustbench" / "cifar10" / "Linf").is_dir()
+    assert "No downloads were attempted" in result.stdout
+
+
+def test_verify_resources_script_reports_inventory_with_temp_resources(tmp_path):
+    data_root = tmp_path / "data"
+    _create_resource_set(data_root)
+    script = Path(__file__).resolve().parents[1] / "scripts" / "verify_resources.py"
+
+    result = subprocess.run(
+        [sys.executable, str(script), "--data-root", str(data_root)],
+        check=False,
+        capture_output=True,
+        text=True,
+    )
+
+    assert result.returncode == 0
+    assert "Resource inventory" in result.stdout
+    assert "CIFAR-10 archive" in result.stdout
+    assert "RobustBench Wong2020Fast weights" in result.stdout

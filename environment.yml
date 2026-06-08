@@ -1,4 +1,4 @@
-name: paper20-cu128
+name: fgjpeg
 channels:
   - pytorch
   - conda-forge

@@ -1,0 +1,15 @@
+{
+  "mode": "combined-mcnemar-audit",
+  "metric_inputs": [
+    "full-run shards merged before public release"
+  ],
+  "source_inputs": [
+    "full-run source-data shards merged before public release"
+  ],
+  "rows": 48,
+  "source_rows": 480000,
+  "metrics_csv": "data/derived/metrics.csv",
+  "source_data_csv": "data/derived/source_data.csv.gz",
+  "metrics_derivation": "regenerated from merged source_data.csv.gz with clean-correct ASR denominators; no-defense baselines aggregated from shard metrics",
+  "clean_accuracy_range_valid": true
+}

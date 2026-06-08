@@ -1,102 +1,82 @@
 # Reproducibility
 
-## Verified Environment
+This package supports three checks, from lightest to heaviest.
 
-The verified local conda environment is `paper20-cu128`. Create it from the
-repository root with:
+## 1. Inspect Included Paper Results
+
+The final data artifacts used by the paper are committed under `results/`:
+
+- `results/figures/`: final PDF/PNG figures and the Mermaid source for Fig. 1.
+- `results/tables/`: final LaTeX table snippets.
+- `results/data/`: final CSV and JSON data snapshots.
+
+These files allow direct comparison without running attacks or rebuilding the
+paper.
+
+## 2. Regenerate Figures and Tables From Included Data
+
+Create the reference environment:
 
 ```powershell
 conda env create -f environment.yml
+conda run -n fgjpeg python -m pip install -e .
 ```
 
-For an existing environment, install the CI dependencies and editable package:
+Run smoke checks:
 
 ```powershell
-conda run -n paper20-cu128 python -m pip install -r requirements-ci.txt
-conda run -n paper20-cu128 python -m pip install -e .
+conda run -n fgjpeg python -m pytest tests -q
+conda run -n fgjpeg python scripts/check_no_secrets.py
 ```
 
-## Smoke Tests
-
-Run the lightweight repository checks and secret scan:
+Regenerate figures:
 
 ```powershell
-conda run -n paper20-cu128 python -m pytest tests -q
-conda run -n paper20-cu128 python scripts/check_no_secrets.py
+conda run -n fgjpeg python scripts/make_figures.py --metrics-csv data/derived/metrics.csv --asr-metrics-csv data/derived/figure_metrics.csv --frequency-csv data/derived/frequency_metrics.csv --source-data-csv data/derived/source_data.csv.gz --out-dir results/figures
 ```
 
-Expected result: pytest completes without failures and the scanner reports no
-likely secrets.
-
-## Scope
-
-This repository reproduces the paper data results: derived-data figures, table
-snippets, lightweight tests, and runtime measurements. It does not regenerate
-or compile manuscript files.
-
-## Figures
-
-Regenerate the paper data-figure assets from included derived data:
+Regenerate tables:
 
 ```powershell
-conda run -n paper20-cu128 python scripts/make_figures.py --metrics-csv data/derived/metrics.csv --asr-metrics-csv data/derived/figure_metrics.csv --frequency-csv data/derived/frequency_metrics.csv --source-data-csv data/derived/source_data.csv --out-dir results/figures
+conda run -n fgjpeg python scripts/make_tables.py --metrics-csv data/derived/metrics.csv --frequency-csv data/derived/frequency_metrics.csv --source-data-csv data/derived/source_data.csv.gz --out-dir results/tables
 ```
 
-Expected outputs include:
+## 3. Rerun Full Experiments
 
-- `results/figures/figure2_asr_by_generation.pdf`
-- `results/figures/figure2_asr_by_generation.png`
-- `results/figures/figure4_centroid_vs_delta.pdf`
-- `results/figures/figure4_centroid_vs_delta.png`
-- `results/figures/figure3_attack_range_summary.pdf`
-- `results/figures/figure3_attack_range_summary.png`
+Full reruns require external resources that are not redistributed here:
 
-## Tables
+- CIFAR-10 images.
+- ImageNet validation images for boundary probes.
+- RobustBench, torchvision, and timm checkpoints used by the paper.
+- A CUDA-capable PyTorch installation for practical runtime.
 
-Regenerate the paper data-table snippets from included derived data:
+The required local layout and redistribution policy are recorded in
+`resources_manifest.yml`. Prepare ignored resource directories:
 
 ```powershell
-conda run -n paper20-cu128 python scripts/make_tables.py --metrics-csv data/derived/metrics.csv --frequency-csv data/derived/frequency_metrics.csv --source-data-csv data/derived/source_data.csv --out-dir results/tables
+conda run -n fgjpeg python scripts/prepare_resources.py --data-root <local-data-root>
 ```
 
-Expected outputs include:
-
-- `results/tables/table_i_prediction_rules.tex`
-- `results/tables/table_ii.tex`
-- `results/tables/table_iii.tex`
-- `results/tables/table_iv.tex`
-- `results/tables/table_full_four_schedule_asr.tex`
-- `results/tables/table_frequency_diagnostics.tex`
-- `results/tables/table_mcnemar_audit.tex`
-- `results/tables/table_tau_independence.tex`
-- `results/tables/table_robust_training_gradient.tex`
-- `results/tables/table_jpeg_aware_boundary.tex`
-
-## Runtime Microbenchmark
-
-Measure JPEG schedule roundtrip runtime on a synthetic RGB image:
+To register an authorized local file, pass `--resource NAME=PATH`, for example:
 
 ```powershell
-conda run -n paper20-cu128 python scripts/benchmark_runtime.py --image-size 32 --repeats 5 --generations 5
+conda run -n fgjpeg python scripts/prepare_resources.py --data-root <local-data-root> --resource cifar10=<path-to-cifar-10-python.tar.gz>
 ```
 
-Expected output is CSV with columns `schedule,generations,ms_per_image` and rows
-for `front_loaded`, `fixed`, `geometric`, and `arithmetic`.
-
-## Full Reruns
-
-Full experiment reruns are optional. They require third-party datasets and model
-checkpoints that are not included in this repository, including CIFAR-10,
-ImageNet validation images, RobustBench checkpoints, and any torchvision or
-timm checkpoints used for boundary probes.
-
-Place local resources only in ignored data or checkpoint directories. Then run:
+After placing local resources in ignored directories, check availability and
+optionally print local file hashes:
 
 ```powershell
-conda run -n paper20-cu128 python scripts/check_resources.py
+conda run -n fgjpeg python scripts/check_resources.py
+conda run -n fgjpeg python scripts/verify_resources.py --data-root <local-data-root> --hash
+```
+
+Then run:
+
+```powershell
 bash scripts/run_full_pipeline.sh
 ```
 
-Keep machine-specific environment variables such as `DATA_DIR`, `RESULTS_DIR`,
+Keep machine-specific variables such as `DATA_DIR`, `RESULTS_DIR`,
 `ROBUSTBENCH_ROOT`, `AUTO_ATTACK_ROOT`, and `DIFFJPEG_ROOT` outside version
 control.

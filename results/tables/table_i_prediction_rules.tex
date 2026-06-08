@@ -1,0 +1,16 @@
+\begin{table}[t]
+\caption{Prediction rules. FL denotes front-loaded, Fix denotes fixed, Geo denotes geometric, \(\omega_\delta\) is the perturbation centroid, \(\tau\) is the elimination threshold, and \(\alpha\) denotes JPEG adaptivity.}
+\label{tab:prediction-rules}
+\centering
+\scriptsize
+\begin{tabular}{llll}
+\hline
+Threat & Adapt. & Condition & Schedule \\
+\hline
+Nonadaptive & \(\alpha=0\) & \(\omega_\delta>\tau\) & FL \\
+Nonadaptive & \(\alpha=0\) & \(\omega_\delta\le\tau\) & Fix \\
+JPEG-aware & \(\alpha=1\) & \(\omega_\delta>\tau\) & Fix \\
+JPEG-aware & \(\alpha=1\) & \(\omega_\delta\le\tau\) & Geo \\
+\hline
+\end{tabular}
+\end{table}

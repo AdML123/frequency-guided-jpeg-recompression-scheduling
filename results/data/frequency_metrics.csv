@@ -1,0 +1,9 @@
+dataset,model,attack,samples,omega_delta,energy_weighted_sum,energy_sum,tau,omega_delta_relation,tau_source,tau_resnet18,tau_all,tau_delta,tau_classification_stable,jpeg_aware_attack,predicted_best_schedule,prediction_rule
+cifar10,cifar_resnet18,fgsm,10000,5.1574410232136705,,,2.73,>,dataset_default,2.73,2.73,0.0,True,False,front_loaded,nonadaptive: front_loaded if omega_delta > tau=2.73 else fixed
+cifar10,cifar_resnet18,pgd,10000,5.027282545103303,,,2.73,>,dataset_default,2.73,2.73,0.0,True,False,front_loaded,nonadaptive: front_loaded if omega_delta > tau=2.73 else fixed
+cifar10,robustbench_engstrom2019,fgsm,10000,2.9192715036698025,,,2.73,>,dataset_default,2.73,2.73,0.0,True,False,front_loaded,nonadaptive: front_loaded if omega_delta > tau=2.73 else fixed
+cifar10,robustbench_engstrom2019,pgd,10000,2.713701660098562,,,2.73,<=,dataset_default,2.73,2.73,0.0,True,False,fixed,nonadaptive: front_loaded if omega_delta > tau=2.73 else fixed
+cifar10,robustbench_rice2020,fgsm,10000,2.592413465144455,77590.1505421712,29929.697397960284,2.73,<=,dataset_default,2.73,2.73,0.0,True,False,fixed,nonadaptive: front_loaded if omega_delta > tau=2.73 else fixed
+cifar10,robustbench_rice2020,pgd,10000,2.466405359085428,70487.47178669002,28579.02960964519,2.73,<=,dataset_default,2.73,2.73,0.0,True,False,fixed,nonadaptive: front_loaded if omega_delta > tau=2.73 else fixed
+cifar10,robustbench_wong2020fast,fgsm,10000,2.8929178927276644,,,2.73,>,dataset_default,2.73,2.73,0.0,True,False,front_loaded,nonadaptive: front_loaded if omega_delta > tau=2.73 else fixed
+cifar10,robustbench_wong2020fast,pgd,10000,2.748305891322924,,,2.73,>,dataset_default,2.73,2.73,0.0,True,False,front_loaded,nonadaptive: front_loaded if omega_delta > tau=2.73 else fixed

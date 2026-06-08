@@ -1,5 +1,5 @@
 cff-version: 1.2.0
-title: "Perturbation Centroid Predicts JPEG Recompression Schedule for Adversarial Defense"
+title: "Frequency-Guided JPEG Recompression Scheduling for Adversarial Defense"
 message: "If you use this code or derived metrics, please cite the associated ICSIP 2026 paper."
 type: software
 version: 0.1.0

@@ -1,0 +1,22 @@
+\begin{table}[t]
+\caption{FL-vs-Fix winner by model and threat model at the largest generation count. Counts give the number of QF ranges in which each supplied schedule family has the lower ASR. FL denotes front-loaded and Fix denotes fixed.}
+\label{tab:model-boundary}
+\centering
+\scriptsize
+{\setlength{\tabcolsep}{2pt}
+\begin{tabular}{@{}p{0.43\linewidth}p{0.36\linewidth}p{0.15\linewidth}@{}}
+\hline
+Condition & Winner counts & Mean ASR \\
+\hline
+C10 ResNet-18 FGSM & FL 3 & 0.660 \\
+C10 ResNet-18 PGD & FL 3 & 0.629 \\
+C10 Engstrom19 FGSM & Fix 3 & 0.298 \\
+C10 Engstrom19 PGD & FL 3 & 0.361 \\
+C10 Rice20 FGSM & Fix 3 & 0.292 \\
+C10 Rice20 PGD & Fix 3 & 0.338 \\
+C10 Wong20 FGSM & Fix 3 & 0.340 \\
+C10 Wong20 PGD & FL 3 & 0.396 \\
+\hline
+\end{tabular}
+}
+\end{table}

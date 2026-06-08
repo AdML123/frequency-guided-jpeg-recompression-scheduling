@@ -1,0 +1,22 @@
+\begin{table}[t]
+\caption{Paired McNemar audit for front-loaded versus fixed schedules at the largest generation. R is the number of QF ranges tested, G is the maximum generation count, \(\Delta\) is FL minus Fix ASR in percentage points, and Disc. reports FL-only/Fixed-only successes.}
+\label{tab:mcnemar-audit}
+\centering
+\tiny
+{\setlength{\tabcolsep}{1.5pt}
+\begin{tabular}{@{}p{0.31\linewidth}rrrrrrr@{}}
+\hline
+Condition & R & G & Pairs & \(\Delta\) & Disc. & \(p\) & Sig. \\
+\hline
+C10 ResNet-18 FGSM & 3 & 5 & 19380 & -12.8 & 744/3219 & <0.001 & yes \\
+C10 ResNet-18 PGD & 3 & 5 & 19380 & -18.7 & 550/4177 & <0.001 & yes \\
+C10 Engstrom19 FGSM & 3 & 5 & 26109 & 0.6 & 916/749 & <0.001 & yes \\
+C10 Engstrom19 PGD & 3 & 5 & 26109 & -0.7 & 893/1081 & <0.001 & yes \\
+C10 Rice20 FGSM & 3 & 5 & 25602 & 2.7 & 1241/545 & <0.001 & yes \\
+C10 Rice20 PGD & 3 & 5 & 25602 & 1.8 & 1172/714 & <0.001 & yes \\
+C10 Wong20 FGSM & 3 & 5 & 25002 & 0.6 & 989/832 & <0.001 & yes \\
+C10 Wong20 PGD & 3 & 5 & 25002 & -1.6 & 834/1226 & <0.001 & yes \\
+\hline
+\end{tabular}
+}
+\end{table}

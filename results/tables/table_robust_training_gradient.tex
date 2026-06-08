@@ -1,0 +1,14 @@
+\begin{table}[t]
+\caption{Robust-training frequency-gradient audit. Robust checkpoints shift \(\omega_\delta\) toward lower DCT frequencies relative to the highest-centroid row.}
+\label{tab:robust-grad}
+\centering
+\scriptsize
+\begin{tabular}{lccccc}
+\hline
+Attack & High model & High \(\omega_\delta\) & Low model & Low \(\omega_\delta\) & Drop \\
+\hline
+FGSM & ResNet-18 & 5.157 & Rice20 & 2.592 & 2.565 \\
+PGD & ResNet-18 & 5.027 & Rice20 & 2.466 & 2.561 \\
+\hline
+\end{tabular}
+\end{table}

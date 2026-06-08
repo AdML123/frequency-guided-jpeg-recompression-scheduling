@@ -1,0 +1,11 @@
+{
+  "mode": "frequency-full8-merged",
+  "rows": 8,
+  "max_samples": 10000,
+  "frequency_metrics_csv": "data/derived/frequency_metrics.csv",
+  "sources": {
+    "direct_full_rows": "merged before public release",
+    "rice_fgsm_shards": "merged before public release",
+    "rice_pgd_shards": "merged before public release"
+  }
+}

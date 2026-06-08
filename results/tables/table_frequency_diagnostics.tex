@@ -1,0 +1,22 @@
+\begin{table}[t]
+\caption{Generated frequency diagnostics. \(\omega_\delta\) is the perturbation DCT centroid, \(\tau\) is the elimination threshold, Margin is \(|\omega_\delta-\tau|\), and Pred. is the rule-table schedule.}
+\label{tab:frequency-diagnostics}
+\centering
+\tiny
+{\setlength{\tabcolsep}{1.6pt}
+\begin{tabular}{@{}p{0.40\linewidth}rcccc@{}}
+\hline
+Condition & N & \(\omega_\delta\) & Rel. & Margin & Pred. \\
+\hline
+C10 ResNet-18 FGSM & 10000 & 5.157 & \(>\) & 2.427 & FL \\
+C10 ResNet-18 PGD & 10000 & 5.027 & \(>\) & 2.297 & FL \\
+C10 Engstrom19 FGSM & 10000 & 2.919 & \(>\) & 0.189 & FL \\
+C10 Engstrom19 PGD & 10000 & 2.714 & \(\le\) & 0.016 & Fix \\
+C10 Rice20 FGSM & 10000 & 2.592 & \(\le\) & 0.138 & Fix \\
+C10 Rice20 PGD & 10000 & 2.466 & \(\le\) & 0.264 & Fix \\
+C10 Wong20 FGSM & 10000 & 2.893 & \(>\) & 0.163 & FL \\
+C10 Wong20 PGD & 10000 & 2.748 & \(>\) & 0.018 & FL \\
+\hline
+\end{tabular}
+}
+\end{table}

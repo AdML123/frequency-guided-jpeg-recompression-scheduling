@@ -1,0 +1,21 @@
+{
+  "mode": "frequency",
+  "models": [
+    "cifar_resnet18",
+    "robustbench_wong2020fast",
+    "robustbench_engstrom2019",
+    "robustbench_rice2020",
+    "imagenet_vit_b_16",
+    "imagenet_swin_t",
+    "imagenet_deit_tiny"
+  ],
+  "attacks": [
+    "fgsm",
+    "jpeg_aware_pgd",
+    "pgd"
+  ],
+  "max_samples": 64,
+  "rows": 13,
+  "frequency_metrics_csv": "data/derived/frequency_metrics.csv",
+  "summary_json": "data/derived/summary.json"
+}

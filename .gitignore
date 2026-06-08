@@ -8,10 +8,6 @@ venv/
 dist/
 build/
 
-# Regenerated paper outputs stay local except for the directory guide.
-results/*
-!results/README.md
-
 *.egg-info/
 *.aux
 *.fdb_latexmk
@@ -23,15 +19,22 @@ results/*
 
 # Raw datasets, checkpoints, and private model artifacts are not redistributed.
 data/raw/
+data/external/
+data/cifar10/
+data/imagenet_raw/
+data/hf_mirror/
 data/checkpoints/
 checkpoints/
 models/
+weights/
 *.pt
 *.pth
 *.ckpt
+*.safetensors
 
 *.tar
 *.zip
+*.tgz
 
 # Credentials and local secret material must stay out of version control.
 .env

@@ -1,0 +1,65 @@
+resources:
+  cifar10:
+    label: CIFAR-10 archive
+    required_for: full CIFAR-10 audit
+    expected_paths:
+      - cifar10/cifar-10-python.tar.gz
+    source: https://www.cs.toronto.edu/~kriz/cifar.html
+    redistribution: no
+    reason_not_bundled: official archive is a large third-party dataset
+    checksum:
+      algorithm: md5
+      value: c58f30108f718f92721af3b95e74349a
+
+  cifar10_resnet18_checkpoint:
+    label: CIFAR-10 standard ResNet-18 checkpoint
+    required_for: standard-model CIFAR-10 audit
+    expected_paths:
+      - checkpoints/cifar/CIFAR10_ResNet18_epoch_20.pt
+    source: local training checkpoint from the paper run
+    redistribution: no
+    reason_not_bundled: model artifact is large and should be supplied through an explicit release if redistributed
+    checksum:
+      algorithm: sha256
+      value: fill-after-local-verification
+
+  imagenet_val:
+    label: ImageNet validation input
+    required_for: ImageNet and Transformer boundary probes
+    expected_paths:
+      - imagenet_raw/ILSVRC2012_img_val.tar
+      - hf_mirror/imagenet1k_val_1k
+    source: official ImageNet access or an authorized local mirror
+    redistribution: no
+    reason_not_bundled: ImageNet validation images require official access and are not mirrored in this public package
+    checksum:
+      algorithm: sha256
+      value: user-provided
+
+  robustbench_checkpoints:
+    label: RobustBench CIFAR-10 Linf checkpoints
+    required_for: robust-model CIFAR-10 audit
+    expected_paths:
+      - checkpoints/robustbench/cifar10/Linf/Wong2020Fast.pt
+      - checkpoints/robustbench/cifar10/Linf/Engstrom2019Robustness.pt
+      - checkpoints/robustbench/cifar10/Linf/Rice2020Overfitting.pt
+    source: RobustBench model zoo or RobustBench cache
+    redistribution: no
+    reason_not_bundled: third-party model weights are referenced by source and cache path
+    checksum:
+      algorithm: sha256
+      value: fill-after-local-verification
+
+  torchvision_timm_weights:
+    label: ImageNet torchvision and timm weights
+    required_for: Transformer and CNN boundary probes
+    expected_paths:
+      - checkpoints/torch_home/hub/checkpoints/vit_b_16-c867db91.pth
+      - checkpoints/torch_home/hub/checkpoints/swin_t-704ceda3.pth
+      - checkpoints/imagenet/deit_tiny_patch16_224.fb_in1k/model.safetensors
+    source: torchvision and timm model weight caches
+    redistribution: no
+    reason_not_bundled: pretrained weights are referenced by source and cache path
+    checksum:
+      algorithm: sha256
+      value: fill-after-local-verification

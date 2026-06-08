@@ -1,0 +1,20 @@
+%%{init: {"flowchart": {"defaultRenderer": "elk", "nodeSpacing": 14, "rankSpacing": 18}, "theme": "base", "themeVariables": {"fontFamily": "Arial, Helvetica, sans-serif", "fontSize": "18px", "primaryColor": "#EAF2F8", "primaryBorderColor": "#2C6E9F", "primaryTextColor": "#111111", "lineColor": "#4A4A4A", "tertiaryColor": "#F7F7F7"}}}%%
+flowchart TB
+    A["Macro operation<br/>ordered QF schedule"]
+    B["Microstructure<br/>DCT residual bins"]
+    C["Bottom process<br/>residual-bin survival"]
+    D["Macro performance<br/>defended ASR"]
+
+    A -->|"first quantizer"| B
+    B -->|"bin erasure or survival"| C
+    C -->|"attack success changes"| D
+
+    H["omega_delta > tau<br/>high-frequency residual"]
+    L["omega_delta <= tau<br/>low-frequency residual"]
+    H -.->|"select FL"| A
+    L -.->|"select Fix"| A
+
+    classDef stage fill:#EAF2F8,stroke:#2C6E9F,stroke-width:1.6px,color:#111111;
+    classDef cue fill:#F7F7F7,stroke:#666666,stroke-width:1.2px,color:#111111;
+    class A,B,C,D stage;
+    class H,L cue;

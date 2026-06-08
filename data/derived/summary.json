@@ -16,6 +16,6 @@
   ],
   "max_samples": 64,
   "rows": 13,
-  "frequency_metrics_csv": "paper-latex\\build\\frequency_metrics.csv",
-  "summary_json": "paper-latex\\build\\summary.json"
+  "frequency_metrics_csv": "data/derived/frequency_metrics.csv",
+  "summary_json": "data/derived/summary.json"
 }
